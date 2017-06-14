@@ -26,7 +26,7 @@ export class AppComponent {
   user = new User();
   users = [];
   onSubmit(){
-    console.log('hello');
-    return false;
+    this.users.push(this.user);
+    this.user = new User();
   }
 }

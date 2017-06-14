@@ -22,7 +22,7 @@
     [(ngModel)]="user.email"
     #email='ngModel'><br>
   Password:
-  <input type="text" name="password" 
+  <input type="password" name="password" 
     required 
     minlength="10" 
     maxlength="24"
@@ -31,7 +31,7 @@
     #password='ngModel'><br>
   Password Confirmation:
   <!--Need to check confirm password-->
-  <input type="text" name="confirm" 
+  <input type="password" name="confirm" 
     required 
     minlength="10" 
     maxlength="24"
@@ -63,3 +63,5 @@
     #state='ngModel'><br>
   <input type="submit">
 </form>
+
+{{ users | json }}
