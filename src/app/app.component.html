@@ -3,46 +3,60 @@
   First name:
   <input type="text" name="first_name" 
     required 
-    minlength="4" 
+    minlength="2" 
     maxlength="24"
     [(ngModel)]="user.first_name"
     #first_name='ngModel'><br>
+  <div class='red' *ngIf='first_name.errors'>First name must be at least 2 characters</div>
+  {{ first_name.errors | json }} <br>
   Last name:
   <input type="text" name="last_name" 
     required 
-    minlength="4" 
+    minlength="2" 
     maxlength="24"
     [(ngModel)]="user.last_name"
     #last_name='ngModel'><br>
+    <div class='red' *ngIf='last_name.errors'>Last name must be at least 2 characters</div>
+  {{ last_name.errors | json }} <br>
   Email:
   <input type="text" name="email" 
     required 
     minlength="4" 
     maxlength="24"
+    pattern="(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
     [(ngModel)]="user.email"
     #email='ngModel'><br>
+    <div class='red' *ngIf='email.errors'>Email must be valid format</div>
+    {{ email.errors | json }} <br>
   Password:
   <input type="password" name="password" 
     required 
-    minlength="10" 
+    minlength="8" 
     maxlength="24"
     pattern="^([a-zA-Z0-9@*#]{8,15})$"
     [(ngModel)]="user.password"
-    #password='ngModel'><br>
+    #password='ngModel'> <br>
+    <div class='red' *ngIf='password.errors'>Password must be at least 8 characters</div>
+    {{ password.errors | json }} <br>
   Password Confirmation:
   <!--Need to check confirm password-->
   <input type="password" name="confirm" 
     required 
-    minlength="10" 
+    minlength="8" 
     maxlength="24"
-    pattern="^([a-zA-Z0-9@*#]{8,15})$"><br>
+    pattern="^([a-zA-Z0-9@*#]{8,15})$"
+    [(ngModel)]='user.confirm'
+    #confirm='ngModel'><br>
+    <div class='red' *ngIf='user.password != user.confirm'>Passwords do not match</div>
+    {{ confirm.errors | json }} <br>
   Address:
   <input type="text" name="address"
     required
     minlength="5"
     maxlength="30"
     [(ngModel)]="user.address"
-    #address='ngModel'><br>
+    #address='ngModel'><br><div class='red' *ngIf='address.errors'>Address must be at least 5 characters</div>
+    {{ address.errors | json }} <br>
   Unit/Apt#:
   <input type="text" name="unit_apt"
     [(ngModel)]="user.unit_apt"
@@ -54,14 +68,23 @@
     maxlength="30"
     [(ngModel)]="user.city"
     #city='ngModel'><br>
+    {{ city.errors | json }} <br>
   State: 
   <input type="text" name="state"
     required 
-    minlength="3" 
+    minlength="2" 
     maxlength="30"
     [(ngModel)]="user.state"
     #state='ngModel'><br>
-  <input type="submit">
+    {{ state.errors | json }} <br>
+  <input [disabled]=
+    'first_name.errors
+    || last_name.errors
+    || email.errors
+    || password.errors
+    || confirm.errors
+    || city.errors
+    || state.errors'type="submit">
 </form>
 
 {{ users | json }}

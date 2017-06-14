@@ -3,10 +3,11 @@ import { Component } from '@angular/core';
 class User {
     constructor(
         public id: number = null,
-        public first_name: string = "",
+        public firstName: string = "",
         public last_name: string = "",
         public email: string = "",
         public password: string = "",
+        public confirm: string = "",
         public address: string = "",
         public unit_apt: string = "",
         public city: string = "",
